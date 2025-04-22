@@ -1,0 +1,494 @@
+/* Charity: water Brand Colors
+
+Primary Colors:
+- Yellow:     #FFC907
+- Blue:       #2E9DF7
+
+Secondary Colors:
+- Light Blue: #8BD1CB
+- Green:      #4FCB53
+- Orange:     #FF902A
+- Red:        #F5402C
+- Dark Green: #159A48
+- Pink:       #F16061
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #FFFFFF; /* Changed from #f0f0f0 to white */
+    font-family: Arial, sans-serif;
+}
+
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.score-panel {
+    display: flex;
+    justify-content: space-between;  /* Space between score and button */
+    align-items: center;
+    width: 800px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#game-container {
+    width: 800px;
+    height: 600px;
+    background-color: #e6f7ff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#start-btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#start-btn:hover {
+    background-color: #45a049;
+}
+
+.score {
+    flex: 0 1 auto;  /* Don't grow, can shrink, auto basis */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.water-drop {
+    position: absolute;
+    width: 30px;  /* Adjusted width for teardrop shape */
+    height: 50px; /* Adjusted height for teardrop shape */
+    background: radial-gradient(circle at 50% 20%, #0099ff, #0066cc); /* Gradient for depth */
+    border-radius: 50% 50% 70% 70%; /* Adjusted for teardrop shape */
+    animation: dropFall linear forwards;
+    transform-origin: center;
+    transform: skewY(-10deg); /* Slight skew for a falling effect */
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.bad-drop {
+    background: radial-gradient(circle at 50% 20%, #ff4444, #cc0000); /* Gradient for depth */
+}
+
+.game-title {
+    color: #2E9DF7; /* Changed to Charity: water blue */
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 5px; /* Reduced from 20px */
+    text-align: center;
+}
+
+.game-tagline {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#feedback-message {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+    height: 30px; /* Reserve space to prevent layout shift */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0; /* Initially hidden */
+}
+
+/* Show feedback message */
+#feedback-message.show {
+    opacity: 1;
+}
+
+.timer-bar-container {
+    width: 800px; /* Match the width of the score panel */
+    height: 10px;
+    background-color: #e0e0e0; /* Light gray background for the bar */
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px 0; /* Add spacing above and below the timer bar */
+}
+
+.timer-bar {
+    width: 100%; /* Full width initially */
+    height: 100%;
+    background-color: #4CAF50; /* Green color for the timer bar */
+    transition: width 1s linear; /* Smooth depletion effect */
+}
+
+@keyframes dropFall {
+    from {
+        transform: translateY(-20px);
+    }
+    to {
+        transform: translateY(600px);
+    }
+}
+
+/* Level Display */
+.level {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2E9DF7; /* Charity: water blue */
+    margin-left: 20px; /* Space between score and level */
+}
+
+/* Badge Container */
+.badge-container {
+    width: 800px; /* Match the width of the game container */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.badge-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#badge-list span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge hover effect */
+#badge-list span:hover {
+    background-color: #FF902A; /* Charity: water orange */
+    color: #fff;
+}
+
+/* Store Container */
+.store-container {
+    width: 800px; /* Match the width of the game container */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.store-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.store-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.store-item {
+    padding: 10px 20px;
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.store-item:hover {
+    background-color: #FF902A; /* Charity: water orange */
+    color: #fff;
+}
+
+/* Store Button */
+#store-btn {
+    padding: 8px 16px;
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+#store-btn:hover {
+    background-color: #FF902A; /* Charity: water orange */
+    color: white;
+}
+
+/* Store Modal */
+.store-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.store-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.store-modal-content h3 {
+    margin-bottom: 20px;
+}
+
+.store-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.store-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.store-item input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.store-item button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.store-item button:hover {
+    background-color: #45a049;
+}
+
+/* Buy Button */
+#buy-btn {
+    margin-top: 20px;
+    padding: 15px 30px; /* Larger padding for a bigger button */
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Larger font size */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#buy-btn:hover {
+    background-color: #45a049; /* Darker green */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+#buy-btn:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Total Cost Display */
+#total-cost {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #FF4444;
+}
+
+/* Inventory Container */
+.inventory-container {
+    width: 800px; /* Match the width of the game container */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.inventory-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.inventory-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.inventory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.inventory-item i {
+    font-size: 24px; /* Icon size */
+    margin-bottom: 5px;
+}
+
+.inventory-item:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    background-color: #FF902A; /* Charity: water orange */
+    color: white;
+}
+
+.inventory-item .effect-timer {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    height: 5px;
+    background-color: #4CAF50; /* Green for active effect */
+    border-radius: 3px;
+    transition: width linear;
+}
+
+.inventory-item .quantity {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #FF4444; /* Red background for quantity */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.store-item i {
+    display: inline-block;
+    width: 30px; /* Set a fixed width for the box */
+    height: 30px; /* Set a fixed height for the box */
+    line-height: 30px; /* Center the icon vertically */
+    text-align: center; /* Center the icon horizontally */
+    border: 2px solid #333; /* Add a border around the icon */
+    border-radius: 5px; /* Add rounded corners */
+    margin-right: 10px; /* Add spacing between the icon and the text */
+    background-color: #f9f9f9; /* Light background color for the box */
+    color: #333; /* Icon color */
+    font-size: 18px; /* Adjust icon size */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 850px) {
+    .game-wrapper, .score-panel, #game-container {
+        width: 95vw;
+    }
+    
+    #game-container {
+        height: 70vh;
+    }
+
+    .badge-container {
+        width: 95vw;
+    }
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Add spacing above the logo */
+    margin-bottom: 10px; /* Add spacing below the logo */
+}
+
+.cw-logo {
+    max-width: 250px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+}
