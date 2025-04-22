@@ -549,3 +549,10 @@ body {
     max-width: 250px; /* Adjust size as needed */
     height: auto; /* Maintain aspect ratio */
 }
+
+.total-score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2E9DF7; /* Charity: water blue */
+    margin-left: 20px; /* Space between score and total score */
+}

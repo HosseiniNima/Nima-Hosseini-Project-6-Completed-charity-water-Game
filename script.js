@@ -40,11 +40,9 @@ function startGame() {
     gameActive = true;
     document.getElementById('start-btn').disabled = true;
 
-    // Reset game variables
-    score = 0;
-    level = 1;
-    badges = [];
-    totalScore = 0;
+    // Reset game variables, but keep level and totalScore
+    score = 0; // Reset score for the current round
+    badges = []; // Reset badges for the current round
     updateLevelDisplay();
     updateBadgeDisplay();
 
@@ -116,6 +114,7 @@ function updateScore(isBadDrop) {
 
     // Update score display
     document.getElementById('score').textContent = score;
+    document.getElementById('total-score').textContent = totalScore; // Update total score display
 
     // Check for level up
     checkLevelUp();
