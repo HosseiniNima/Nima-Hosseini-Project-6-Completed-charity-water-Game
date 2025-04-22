@@ -466,6 +466,63 @@ body {
     font-size: 18px; /* Adjust icon size */
 }
 
+/* Inventory Button */
+.inventory-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.inventory-button:hover {
+    background-color: #FF902A; /* Charity: water orange */
+    color: white;
+}
+
+/* Dropdown Menu */
+.inventory-dropdown {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below the button */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto; /* Scroll if content exceeds max height */
+    z-index: 1000;
+    padding: 10px;
+}
+
+.inventory-dropdown p {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin: 0;
+}
+
+.inventory-dropdown .inventory-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Show dropdown when active */
+.inventory-button.active .inventory-dropdown {
+    display: block;
+}
+
 /* Adjustments for smaller screens */
 @media (max-width: 850px) {
     .game-wrapper, .score-panel, #game-container {

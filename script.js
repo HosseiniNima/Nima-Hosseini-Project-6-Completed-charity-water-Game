@@ -434,13 +434,14 @@ function addToInventory(itemName, duration) {
         quantity.textContent = '1';
         itemElement.appendChild(quantity);
 
-        // Add click event to activate the item's effect
-        itemElement.addEventListener('click', () => {
-            activateItemEffect(itemName, duration, itemElement);
-        });
-
         // Append the item to the inventory
         inventoryContainer.appendChild(itemElement);
+    }
+
+    // Hide the empty inventory message
+    const emptyInventoryMessage = document.getElementById('empty-inventory-message');
+    if (emptyInventoryMessage) {
+        emptyInventoryMessage.style.display = 'none';
     }
 }
 
@@ -541,3 +542,71 @@ document.getElementById('buy-btn').addEventListener('click', () => {
     updateTotalCost();
     storeModal.style.display = 'none';
 });
+
+const inventoryButton = document.getElementById('inventory-button');
+const inventoryDropdown = document.getElementById('inventory-dropdown');
+const emptyInventoryMessage = document.getElementById('empty-inventory-message');
+
+// Toggle dropdown visibility
+inventoryButton.addEventListener('click', () => {
+    inventoryButton.classList.toggle('active');
+    inventoryDropdown.style.display = inventoryButton.classList.contains('active') ? 'block' : 'none';
+});
+
+// Update inventory display
+function addToInventory(itemName, duration) {
+    const inventoryContainer = document.getElementById('inventory-items');
+    let itemElement = document.querySelector(`.inventory-item[data-item="${itemName}"]`);
+
+    if (itemElement) {
+        // If the item already exists, increment its quantity
+        const quantityElement = itemElement.querySelector('.quantity');
+        quantityElement.textContent = parseInt(quantityElement.textContent, 10) + 1;
+    } else {
+        // Create a new inventory item element
+        itemElement = document.createElement('div');
+        itemElement.className = 'inventory-item';
+        itemElement.dataset.item = itemName;
+
+        // Add an icon or image based on the item name
+        const icon = document.createElement('i');
+        switch (itemName) {
+            case '+5 Seconds':
+                icon.className = 'fas fa-clock'; // Clock icon
+                break;
+            case 'No Reds for 7s':
+                icon.className = 'fas fa-shield-alt'; // Shield icon
+                break;
+            case 'Double Points for 10s':
+                icon.className = 'fas fa-star'; // Star icon
+                break;
+            case 'Clear All Drops':
+                icon.className = 'fas fa-broom'; // Broom icon
+                break;
+            case 'Slow Drops for 10s':
+                icon.className = 'fas fa-snail'; // Snail icon
+                break;
+        }
+
+        // Add the icon and item name to the inventory item
+        itemElement.appendChild(icon);
+        const label = document.createElement('span');
+        label.textContent = itemName;
+        itemElement.appendChild(label);
+
+        // Add a quantity display
+        const quantity = document.createElement('span');
+        quantity.className = 'quantity';
+        quantity.textContent = '1';
+        itemElement.appendChild(quantity);
+
+        // Append the item to the inventory
+        inventoryContainer.appendChild(itemElement);
+    }
+
+    // Hide the empty inventory message
+    const emptyInventoryMessage = document.getElementById('empty-inventory-message');
+    if (emptyInventoryMessage) {
+        emptyInventoryMessage.style.display = 'none';
+    }
+}
