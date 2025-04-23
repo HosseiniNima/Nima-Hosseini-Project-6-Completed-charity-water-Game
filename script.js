@@ -12,7 +12,19 @@ let totalScore = 0;      // Track total score for level progression
 
 // Event listener for the start button
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('start-btn').addEventListener('click', startGame);
+    // Start Game button
+    document.getElementById('start-btn').addEventListener('click', () => {
+        console.log('Start Game button clicked');
+        startGame();
+    });
+
+    // Inventory button
+    document.getElementById('inventory-button').addEventListener('click', () => {
+        console.log('Inventory button clicked');
+        toggleInventory();
+    });
+
+    document.getElementById('store-btn').addEventListener('click', openStore);
 });
 
 // Open and close the store modal
@@ -192,4 +204,11 @@ function updateBadgeDisplay() {
         badgeElement.className = 'badge'; // Add a class for styling
         badgeList.appendChild(badgeElement);
     });
+}
+
+// Toggle Inventory Dropdown
+function toggleInventory() {
+    const inventoryDropdown = document.getElementById('inventory-dropdown');
+    inventoryDropdown.style.display =
+        inventoryDropdown.style.display === 'block' ? 'none' : 'block';
 }
