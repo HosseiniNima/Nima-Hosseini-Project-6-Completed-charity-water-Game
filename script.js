@@ -193,5 +193,3 @@ function updateBadgeDisplay() {
         badgeList.appendChild(badgeElement);
     });
 }
-
-<button id="start-btn">Start Game</button>
