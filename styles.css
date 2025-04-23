@@ -556,3 +556,30 @@ body {
     color: #2E9DF7; /* Charity: water blue */
     margin-left: 20px; /* Space between score and total score */
 }
+
+#difficulty-display {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.obstacle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #FF4444; /* Red for obstacles */
+    border-radius: 50%;
+    top: 0;
+    animation: moveObstacle 4s linear infinite;
+}
+
+@keyframes moveObstacle {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(600px); /* Move to the bottom of the game container */
+    }
+}
