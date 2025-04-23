@@ -12,9 +12,8 @@ let totalScore = 0;      // Track total score for level progression
 
 // Event listener for the start button
 document.addEventListener('DOMContentLoaded', () => {
-    // Start Game button
     document.getElementById('start-btn').addEventListener('click', () => {
-        console.log('Start Game button clicked');
+        console.log('Start Game button clicked'); // Debugging log
         startGame();
     });
 
@@ -26,7 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('store-btn').addEventListener('click', openStore);
 });
-
+function openStore() {
+    const storeModal = document.getElementById('store-modal');
+    storeModal.style.display = 'flex'; // Show the store modal
+    console.log('Store opened');
+}
 // Open and close the store modal
 const storeBtn = document.getElementById('store-btn');
 const storeModal = document.getElementById('store-modal');
@@ -87,7 +90,32 @@ function startDropInterval(interval) {
     clearInterval(gameInterval); // Clear any existing interval
     gameInterval = setInterval(createDrop, interval);
 }
+function createDrop() {
+    const gameContainer = document.getElementById('game-container');
+    const drop = document.createElement('div');
+    drop.className = 'water-drop';
 
+    // Randomize the drop's position
+    const randomX = Math.random() * (gameContainer.offsetWidth - 50); // Ensure it stays within bounds
+    drop.style.left = `${randomX}px`;
+
+    // Add animation for the drop falling
+    drop.style.animation = 'dropFall 3s linear';
+
+    // Append the drop to the game container
+    gameContainer.appendChild(drop);
+
+    // Remove the drop after the animation ends
+    drop.addEventListener('animationend', () => {
+        drop.remove();
+    });
+
+    // Add click event to the drop
+    drop.addEventListener('click', () => {
+        updateScore(false); // Good drop
+        drop.remove();
+    });
+}
 function updateTimer() {
     timeLeft--;
     document.getElementById('time-left').textContent = timeLeft;
