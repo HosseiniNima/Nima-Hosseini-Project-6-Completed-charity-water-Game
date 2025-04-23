@@ -189,6 +189,7 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    margin-top: 10px;
 }
 
 #badge-list span {
@@ -200,6 +201,16 @@ body {
     font-weight: bold;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.badge {
+    background-color: #FFC907; /* Charity: water yellow */
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Badge hover effect */

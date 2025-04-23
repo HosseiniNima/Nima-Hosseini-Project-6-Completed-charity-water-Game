@@ -9,7 +9,9 @@ let badges = [];         // Track earned badges
 let totalScore = 0;      // Track total score for level progression
 
 // Event listener for the start button
-document.getElementById('start-btn').addEventListener('click', startGame);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('start-btn').addEventListener('click', startGame);
+});
 
 // Open and close the store modal
 const storeBtn = document.getElementById('store-btn');
@@ -34,11 +36,16 @@ storeModal.addEventListener('click', (event) => {
 
 // Game initialization function
 function startGame() {
-    if (gameActive) return; // Prevent multiple game instances
+    console.log('Start Game button clicked'); // Debugging log
+    if (gameActive) {
+        console.log('Game is already active');
+        return; // Prevent multiple game instances
+    }
 
     // Set up initial game state
     gameActive = true;
     document.getElementById('start-btn').disabled = true;
+    console.log('Game started');
 
     // Reset game variables, but keep level and totalScore
     score = 0; // Reset score for the current round
@@ -168,3 +175,21 @@ function updateDifficultyDisplay() {
         difficultyDisplay.textContent = 'Difficulty: Hard';
     }
 }
+
+function updateBadgeDisplay() {
+    const badgeList = document.getElementById('badge-list');
+    if (!badgeList) return; // Ensure the badge list element exists
+
+    // Clear the current badge list
+    badgeList.innerHTML = '';
+
+    // Add each badge to the badge list
+    badges.forEach(badge => {
+        const badgeElement = document.createElement('span');
+        badgeElement.textContent = badge;
+        badgeElement.className = 'badge'; // Add a class for styling
+        badgeList.appendChild(badgeElement);
+    });
+}
+
+<button id="start-btn">Start Game</button>
