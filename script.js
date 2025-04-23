@@ -1,3 +1,5 @@
+console.log('script.js is loaded');
+
 // Game state variables
 let gameActive = false;  // Tracks if game is currently running
 let gameInterval;        // Stores the interval that creates drops
