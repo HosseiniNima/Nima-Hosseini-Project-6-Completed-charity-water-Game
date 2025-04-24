@@ -144,10 +144,10 @@ body {
 }
 
 .timer-bar {
-    width: 100%; /* Full width initially */
-    height: 100%;
-    background-color: #4CAF50; /* Green color for the timer bar */
-    transition: width 1s linear; /* Smooth depletion effect */
+    width: 100%;
+    height: 10px;
+    background-color: #4CAF50; /* Green */
+    transition: width 1s linear;
 }
 
 @keyframes dropFall {

@@ -12,7 +12,7 @@ let totalScore = 0;      // Track total score for level progression
 
 // Event listener for the start button
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('start-btn').addEventListener('click', () => {
+    document.getElementById("start-btn").addEventListener("click", () => {
         console.log('Start Game button clicked'); // Debugging log
         startGame();
     });
@@ -239,4 +239,25 @@ function toggleInventory() {
     const inventoryDropdown = document.getElementById('inventory-dropdown');
     inventoryDropdown.style.display =
         inventoryDropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+function addObstacles() {
+    const gameContainer = document.getElementById('game-container');
+    const obstacle = document.createElement('div');
+    obstacle.className = 'obstacle';
+
+    // Randomize obstacle position
+    const randomX = Math.random() * (gameContainer.offsetWidth - 50); // Ensure it stays within bounds
+    obstacle.style.left = `${randomX}px`;
+
+    // Add animation for movement
+    obstacle.style.animation = 'moveObstacle 4s linear infinite';
+
+    // Append obstacle to the game container
+    gameContainer.appendChild(obstacle);
+
+    // Remove obstacle after animation ends
+    obstacle.addEventListener('animationend', () => {
+        obstacle.remove();
+    });
 }
