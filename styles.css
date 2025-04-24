@@ -22,10 +22,10 @@ Secondary Colors:
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #FFFFFF; /* Changed from #f0f0f0 to white */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Ensure space between elements */
+    min-height: 100vh; /* Ensure the body takes up the full viewport height */
+    background-color: #FFFFFF;
     font-family: Arial, sans-serif;
 }
 
