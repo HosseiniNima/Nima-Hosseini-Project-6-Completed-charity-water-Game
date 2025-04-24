@@ -594,3 +594,27 @@ body {
         transform: translateY(600px); /* Move to the bottom of the game container */
     }
 }
+
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #2E9DF7; /* Charity: water blue */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px; /* Add spacing above the footer */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure it stays within the normal flow of the page */
+}
+
+.footer a {
+    color: #FFC907; /* Charity: water yellow */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    color: #FF902A; /* Charity: water orange */
+    text-decoration: underline;
+}
