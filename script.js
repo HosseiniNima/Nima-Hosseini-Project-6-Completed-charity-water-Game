@@ -51,6 +51,103 @@ storeModal.addEventListener('click', (event) => {
     }
 });
 
+function updateTotalCost() {
+  const addTimeQty = parseInt(document.getElementById('addTime-qty').value) || 0;
+  const noRedsQty = parseInt(document.getElementById('noReds-qty').value) || 0;
+  const doublePointsQty = parseInt(document.getElementById('doublePoints-qty').value) || 0;
+  const clearDropsQty = parseInt(document.getElementById('clearDrops-qty').value) || 0;
+  const slowDropsQty = parseInt(document.getElementById('slowDrops-qty').value) || 0;
+
+  // Define the cost of each power-up
+  const addTimeCost = 50;
+  const noRedsCost = 100;
+  const doublePointsCost = 150;
+  const clearDropsCost = 200;
+  const slowDropsCost = 250;
+
+  // Calculate the total cost
+  const totalCost =
+      addTimeQty * addTimeCost +
+      noRedsQty * noRedsCost +
+      doublePointsQty * doublePointsCost +
+      clearDropsQty * clearDropsCost +
+      slowDropsQty * slowDropsCost;
+
+  // Update the total cost display
+  document.getElementById('total-cost').textContent = totalCost;
+}
+
+document.getElementById('buy-btn').addEventListener('click', () => {
+    const totalCost = parseInt(document.getElementById('total-cost').textContent) || 0;
+
+    if (score < totalCost) {
+        alert('Not enough points to make this purchase!');
+        return;
+    }
+
+    // Deduct the total cost from the player's score
+    score -= totalCost;
+    document.getElementById('score').textContent = score;
+
+    // Add purchased items to the inventory
+    const addTimeQty = parseInt(document.getElementById('addTime-qty').value) || 0;
+    const noRedsQty = parseInt(document.getElementById('noReds-qty').value) || 0;
+    const doublePointsQty = parseInt(document.getElementById('doublePoints-qty').value) || 0;
+    const clearDropsQty = parseInt(document.getElementById('clearDrops-qty').value) || 0;
+    const slowDropsQty = parseInt(document.getElementById('slowDrops-qty').value) || 0;
+
+    const inventoryItems = document.getElementById('inventory-items');
+
+    if (addTimeQty > 0) {
+        addToInventory('Add Time', addTimeQty, inventoryItems);
+    }
+    if (noRedsQty > 0) {
+        addToInventory('No Reds', noRedsQty, inventoryItems);
+    }
+    if (doublePointsQty > 0) {
+        addToInventory('Double Points', doublePointsQty, inventoryItems);
+    }
+    if (clearDropsQty > 0) {
+        addToInventory('Clear Drops', clearDropsQty, inventoryItems);
+    }
+    if (slowDropsQty > 0) {
+        addToInventory('Slow Drops', slowDropsQty, inventoryItems);
+    }
+
+    // Reset the quantities and total cost
+    document.querySelectorAll('.store-item input[type="number"]').forEach(input => {
+        input.value = 0;
+    });
+    document.getElementById('total-cost').textContent = 0;
+
+    alert('Purchase successful!');
+});
+
+function addToInventory(itemName, quantity, inventoryContainer) {
+    const existingItem = Array.from(inventoryContainer.children).find(
+        item => item.dataset.itemName === itemName
+    );
+
+    if (existingItem) {
+        // Update the quantity if the item already exists
+        const quantityElement = existingItem.querySelector('.quantity');
+        const currentQuantity = parseInt(quantityElement.textContent) || 0;
+        quantityElement.textContent = currentQuantity + quantity;
+    } else {
+        // Create a new inventory item
+        const inventoryItem = document.createElement('div');
+        inventoryItem.className = 'inventory-item';
+        inventoryItem.dataset.itemName = itemName;
+
+        inventoryItem.innerHTML = `
+            <span>${itemName}</span>
+            <span class="quantity">${quantity}</span>
+        `;
+
+        inventoryContainer.appendChild(inventoryItem);
+    }
+}
+
 // Game initialization function
 function startGame() {
     console.log('Start Game button clicked'); // Debugging log
